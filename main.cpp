@@ -8,11 +8,13 @@ using namespace std;
 void menu();
 bool nuskaitymas(int& n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[]);
 bool saugojimas(int n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[]);
+void isvestisIEkrana(int n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[]);
 double kategorijosSuma(int n, string kategorija[], double kaina[], int kiekis[], string parinktis);
 double nuolaidos(double kaina, int kiekis);
 double galutineSuma(double sumaBeNuolaidos, double nuolaida);
 double sumaBeNuolaidos(double kaina, int kiekis);
 void kategorijosIsvestis(int n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[], string pasirinktaKategorija);
+void kategorijosSumosIsvestis(int n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[], string pasirinktaKategorija);
 
 int main() {
 
@@ -29,18 +31,20 @@ int main() {
         menu();
         cin >> pasirinkimas;
         switch(pasirinkimas) {
-            case 1:{
-                cout << "Visos prekes:" << endl;
+            case 1: {
+                cout << left << setw(15) << "Kategorija" << setw(50) << "Pavadinimas" << right << setw(15) << "Vieneto kaina" << setw(10) << "Kiekis" << endl;
+                cout << string(117, '-') << endl;
                 for(int i = 0; i < n; i++){
                     cout << left << setw(15) << kategorija[i]
                         << setw(50) << pavadinimas[i]
                         << right << fixed << setprecision(2)
                         << setw(15) << kaina[i]
-                        << setw(10) << kiekis[i] << endl;
+                        << setw(15) << kiekis[i] << endl;
                 }
+                cout << string(117, '-') << endl;
                 break;
             }
-            case 2:{
+            case 2: {
                 int x;
                 cout << "Pasirinkite kategorija: " << endl;
                 cout << "1. Dviraciai" << endl;
@@ -68,12 +72,46 @@ int main() {
                 break;
             }
             case 3: {
+                cout << left << setw(15) << "Kategorija" << setw(50) << "Pavadinimas" << right << setw(15) << "Suma" << endl;
+                cout << string(117, '-') << endl;
+                for(int i = 0; i < n; i++){
+                    cout << left << setw(15) << kategorija[i]
+                        << setw(50) << pavadinimas[i]
+                        << right << fixed << setprecision(2)
+                        << setw(15) << sumaBeNuolaidos(kaina[i], kiekis[i]) << endl;
+                }
+                cout << string(117, '-') << endl;
                 break;
             }
             case 4: {
+                int x;
+                cout << "Pasirinkite kategorija: " << endl;
+                cout << "1. Dviraciai" << endl;
+                cout << "2. Dalys" << endl;
+                cout << "3. Aksesuarai" << endl;
+                cin >> x;
+                switch (x) {
+                    case 1: {
+                        kategorijosSumosIsvestis(n, kategorija, pavadinimas, kaina, kiekis, "Dviraciai");
+                        break;
+                    }
+                    case 2: {
+                        kategorijosSumosIsvestis(n, kategorija, pavadinimas, kaina, kiekis, "Dalys");
+                        break;
+                    }
+                    case 3: {
+                        kategorijosSumosIsvestis(n, kategorija, pavadinimas, kaina, kiekis, "Aksesuarai");
+                        break;
+                    }
+                    default: {
+                        cout << "Tokio pasirinkimo nera, bandykite dar karta." << endl;
+                        break;
+                    }
+                }
                 break;
             }
             case 5: {
+                isvestisIEkrana(n, kategorija, pavadinimas, kaina, kiekis);
                 break;
             }
             case 6: {
@@ -138,6 +176,7 @@ bool saugojimas(int n, string kategorija[], string pavadinimas[], double kaina[]
         return false;
     }
     fout << left << setw(15) << "Kategorija" << setw(50) << "Pavadinimas" << right << setw(15) << "Vieneto kaina" << setw(10) << "Kiekis" << setw(15) << "Suma" << setw(15) << "Nuolaida" << setw(15) << "Galutine suma" << endl;
+    cout << string(140, '-') << endl;
     for(int i = 0; i < n; i++){
         fout << left << setw(15) << kategorija[i]
             << setw(50) << pavadinimas[i]
@@ -148,6 +187,7 @@ bool saugojimas(int n, string kategorija[], string pavadinimas[], double kaina[]
             << setw(15) << nuolaidos(kaina[i], kiekis[i])
             << setw(15) << galutineSuma(sumaBeNuolaidos(kaina[i], kiekis[i]), nuolaidos(kaina[i], kiekis[i])) << endl;
     }
+    cout << string(140, '-') << endl;
     fout.close();
     return true;
 }
@@ -181,7 +221,8 @@ double galutineSuma(double sumaBeNuolaidos, double nuolaida) {
 }
 
 void kategorijosIsvestis(int n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[], string pasirinktaKategorija) {
-    cout << "Pasirinktos kategorijos prekes:" << endl;
+    cout << left << setw(15) << "Kategorija" << setw(50) << "Pavadinimas" << right << setw(15) << "Vieneto kaina" << setw(10) << "Kiekis" << endl;
+    cout << string(117, '-') << endl;
     for(int i = 0; i < n; i++) {
         if(kategorija[i] == pasirinktaKategorija){
             cout << left << setw(15) << kategorija[i]
@@ -191,4 +232,35 @@ void kategorijosIsvestis(int n, string kategorija[], string pavadinimas[], doubl
                 << setw(10) << kiekis[i] << endl;
         }
     }
+    cout << string(117, '-') << endl;
+}
+
+void kategorijosSumosIsvestis(int n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[], string pasirinktaKategorija) {
+    cout << left << setw(15) << "Kategorija" << setw(50) << "Pavadinimas" << right << setw(15) << "Suma" << endl;
+    cout << string(117, '-') << endl;
+    for(int i = 0; i < n; i++) {
+        if(kategorija[i] == pasirinktaKategorija){
+            cout << left << setw(15) << kategorija[i]
+                << setw(50) << pavadinimas[i]
+                << right << fixed << setprecision(2)
+                << setw(15) << sumaBeNuolaidos(kaina[i], kiekis[i]) << endl;
+        }
+    }
+    cout << string(117, '-') << endl;
+}
+
+void isvestisIEkrana(int n, string kategorija[], string pavadinimas[], double kaina[], int kiekis[]) {
+    cout << left << setw(15) << "Kategorija" << setw(50) << "Pavadinimas" << right << setw(15) << "Vieneto kaina" << setw(10) << "Kiekis" << setw(15) << "Suma" << setw(15) << "Nuolaida" << setw(15) << "Galutine suma" << endl;
+    cout << string(140, '-') << endl;
+    for(int i = 0; i < n; i++){
+        cout << left << setw(15) << kategorija[i]
+            << setw(50) << pavadinimas[i]
+            << right << fixed << setprecision(2)
+            << setw(15) << kaina[i]
+            << setw(10) << kiekis[i]
+            << setw(15) << sumaBeNuolaidos(kaina[i], kiekis[i])
+            << setw(15) << nuolaidos(kaina[i], kiekis[i])
+            << setw(15) << galutineSuma(sumaBeNuolaidos(kaina[i], kiekis[i]), nuolaidos(kaina[i], kiekis[i])) << endl;
+    }
+    cout << string(140, '-') << endl;
 }
