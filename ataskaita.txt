@@ -1,4 +1,5 @@
 Kategorija     Pavadinimas                                         Vieneto kaina    Kiekis           Suma       Nuolaida  Galutine suma
+--------------------------------------------------------------------------------------------------------------------------------------------
 Dviraciai      KROSS Level 4.0                                            950.00         2        1900.00           0.00        1900.00
 Dviraciai      KROSS Hexagon 8.0                                          920.00         1         920.00           0.00         920.00
 Dviraciai      KROSS Mini 4.0                                             290.00         3         870.00           0.00         870.00
@@ -29,3 +30,7 @@ Aksesuarai     KROSS KZF 450 750 mm spyna                                  65.00
 Aksesuarai     KROSS Quark F2.0 USB priekinis zibintas                     12.00         9         108.00           0.00         108.00
 Aksesuarai     KROSS HPG 2.0 mini pompa                                    15.00        10         150.00          15.00         135.00
 Aksesuarai     KROSS Safety F 70 lm USB-C priekinis zibintas               16.00        14         224.00          22.40         201.60
+--------------------------------------------------------------------------------------------------------------------------------------------
+Dviraciu suma po nuolaidu:      17600.00                                                            Bendra suma be nuolaidu:   22910.00
+Daliu suma po nuolaidu:          3152.00                                                                      Nuolaidu suma:     245.00
+Aksesuaru suma po nuolaidu:      1913.00                                                 Galutine moketina suma po nuolaidu:   22665.00
